@@ -1,0 +1,43 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskManager</title>
+    <link rel=stylesheet href='{% static "style.css"%}'>
+</head>
+<body>
+    <!--master container-->
+    <div class="wrapper">
+        <!--nav bar-->
+        <nav class="top-nav">
+            <ul class="nav-list">
+                <li class="nav-item">TaskManager</li>
+                <li class="nav-item">Contact</li>
+            </ul>
+        </nav>
+        <!--end navbar-->
+        <!--Task head-->
+        <div class="task-head">
+            <form method="post" class="task-form">
+                {% csrf_token %}
+                <input type="text" name="task" id="task-text" placeholder="Add your task">
+                <input type="date" name="task-date" id="task-date">
+                <input type="submit" value="Add" class="addTaskBtn">
+            </form>
+        </div>
+        <!--end task head-->
+        <!--Task div-->
+        {% for task in tasks%}
+        <div class="task">
+            <p class="task-item">{{task.task}}</p>
+            <p class="task-item">{{task.date}}</p>
+            <!--<p class="task-item">{{task.status}}</p>-->
+            <button> delete</button>
+        </div>
+        {% endfor %}
+        <!--end task div-->
+    </div>
+</body>
+</html>
