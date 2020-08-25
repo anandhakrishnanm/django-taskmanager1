@@ -20,7 +20,7 @@
         <!--end navbar-->
         <!--Task head-->
         <div class="task-head">
-            <form method="post" class="task-form">
+            <form method="post" class="task-form" action="add_task">
                 {% csrf_token %}
                 <input type="text" name="task" id="task-text" placeholder="Add your task">
                 <input type="date" name="task-date" id="task-date">
@@ -34,7 +34,11 @@
             <p class="task-item">{{task.task}}</p>
             <p class="task-item">{{task.date}}</p>
             <!--<p class="task-item">{{task.status}}</p>-->
-            <button> delete</button>
+            <!-- <form action="delete_task" method="post">
+                {% csrf_token %}
+                <input type="submit" value="delete">
+            </form> -->
+            <a href="{% url 'delete_task' task.id%}"><button>Delete</button></a>
         </div>
         {% endfor %}
         <!--end task div-->

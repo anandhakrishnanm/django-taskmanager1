@@ -1,10 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Task
 
 # Create your views here.
 def home(request):
-    
-
     tasks = Task.objects.all()
     return render(request,'index.html',{'tasks': tasks})
+def add_task(request):
+    task1 = request.POST["task"]
+    date1 = request.POST["task-date"]
+    tasks = Task(task=task1,date=date1)
+    tasks.save()
+    tasks = Task.objects.all()
+    return render(request,'index.html',{'tasks': tasks})
+
+def delete_task(request,task_id):
+    tasks = Task.objects.get(id=task_id)
+    tasks.delete()
+    return redirect('home')
