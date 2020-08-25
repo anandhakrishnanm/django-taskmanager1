@@ -11,8 +11,7 @@ def add_task(request):
     date1 = request.POST["task-date"]
     tasks = Task(task=task1,date=date1)
     tasks.save()
-    tasks = Task.objects.all()
-    return render(request,'index.html',{'tasks': tasks})
+    return redirect('home')
 
 def delete_task(request,task_id):
     tasks = Task.objects.get(id=task_id)
